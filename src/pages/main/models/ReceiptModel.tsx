@@ -7,11 +7,23 @@
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
+/**
+  receiptDate: Date 일자
+  usageList: string[] 구분
+  paymentPlace: string 사용처
+  content:string 내용
+  paidAmount: number 금액
+  payer: string[] 사용자
+  attendants: string[] 비고
+  isProved: boolean 증빙
+ */
+
 export interface ReceiptModel {
-  receiptDate: Date
+  receiptDate: Date | string
   usageList: string[]
   paymentPlace: string
-  paidAmount: string
+  content: string
+  paidAmount: number
   payer: string[]
   attendants: string[]
   isProved: boolean
@@ -174,7 +186,8 @@ const typeMap: any = {
       { json: "receiptDate", js: "receiptDate", typ: Date },
       { json: "usageList", js: "usageList", typ: a("") },
       { json: "paymentPlace", js: "paymentPlace", typ: "" },
-      { json: "paidAmount", js: "paidAmount", typ: "" },
+      { json: "content", js: "content", typ: "" },
+      { json: "paidAmount", js: "paidAmount", typ: 0 },
       { json: "payer", js: "payer", typ: a("") },
       { json: "attendants", js: "attendants", typ: a("") },
       { json: "isProved", js: "isProved", typ: true },
