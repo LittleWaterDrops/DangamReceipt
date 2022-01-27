@@ -3,6 +3,7 @@ import Button from "../components/Button"
 import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
 import SampleModel from "../models/SampleModel.json"
+import Calender from "react-calendar"
 
 // const receiptModel = Convert.toReceiptModel(JSON.stringify(SampleModel))
 // const receivedData: Array<ReceiptModel> = SampleModel
