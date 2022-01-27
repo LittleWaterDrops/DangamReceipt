@@ -1,15 +1,16 @@
 import express, { Request, Response, json, urlencoded } from "express"
 import morgan from "morgan"
 import cors from "cors"
+import dotenv from "dotenv"
+import path from "path/posix"
+import mysql from "mysql"
 
 const app: express.Application = express()
 const port: number = 3001
 
 app.use(cors())
-
 app.use(json())
 app.use(urlencoded({ extended: true }))
-
 app.use(morgan("dev"))
 
 app.get("/", (request: Request, response: Response) => {
