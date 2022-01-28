@@ -3,7 +3,8 @@ import Button from "../components/Button"
 import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
 import SampleModel from "../models/SampleModel.json"
-import Calender from "react-calendar"
+import Calendar from "react-calendar"
+import ToggleButton from "../components/ToggleButton"
 
 // const receiptModel = Convert.toReceiptModel(JSON.stringify(SampleModel))
 // const receivedData: Array<ReceiptModel> = SampleModel
@@ -18,13 +19,18 @@ import Calender from "react-calendar"
   attendants: string[] 비고
   isProved: boolean 증빙
  */
-const initialData: ReceiptModel = {} as ReceiptModel
+const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
 function MainScreen() {
   const [receiptData, setReceiptData] = useState(initialData)
 
+  console.log(receiptData)
+
   return (
     <div>
+      <Calendar
+        onChange={(parameter: Date) => setReceiptData({ ...receiptData, receiptDate: parameter })}
+      />
       <TextInput
         title="사용처"
         returnValue={(parameter) => setReceiptData({ ...receiptData, paymentPlace: parameter })}
@@ -32,6 +38,20 @@ function MainScreen() {
       <TextInput
         title="내용"
         returnValue={(parameter) => setReceiptData({ ...receiptData, content: parameter })}
+      />
+      <TextInput
+        title="금액"
+        inputType={"number"}
+        returnValue={(parameter) => {
+          // 텍스트를 숫자로 변환, 빈 텍스트인 경우 0으로 반환
+          var parsedParameter = parseInt(parameter)
+          parsedParameter = isNaN(parsedParameter) ? 0 : parsedParameter
+
+          setReceiptData({ ...receiptData, paidAmount: parsedParameter })
+        }}
+      />
+      <ToggleButton
+        onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
       />
       <Button text="등록" onClicked={() => SubmitData(receiptData)} />
     </div>
@@ -43,8 +63,7 @@ function SubmitData(dataToSubmit: ReceiptModel) {
     Convert.receiptModelToJson([dataToSubmit])
     console.log("success")
   } catch (e: any) {
-    console.log("failed")
-    console.log(e)
+    console.log("failed - ", e)
   }
 }
 

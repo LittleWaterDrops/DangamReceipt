@@ -1,23 +1,44 @@
 import React, { useState } from "react"
+
 type TextInputProps = {
   title: string
+  inputType?: React.HTMLInputTypeAttribute | undefined
   returnValue: (text: string) => void
 }
 
-function TextInput({ title, returnValue }: TextInputProps) {
+function TextInput({ title, inputType, returnValue }: TextInputProps) {
   const [text, setText] = useState("")
+  const inputRef = React.createRef<HTMLInputElement>()
 
+  // 숫자를 입력받을 때 맨 앞 0을 제거한 숫자만 입력받도록 함
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value)
+    inputType == "number"
+      ? setText(e.target.value.replace(/^0+/, "").replace(/\D/, ""))
+      : setText(e.target.value)
   }
 
+  // 블러 처리됐을 때 값을 넣어줌
   const handleBlur = () => {
     returnValue(text)
   }
+
+  // 엔터키가 입력되면 블러처리
+  const checkEnterPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      inputRef.current?.blur()
+    }
+  }
+
   return (
     <div>
       <h3>{title}</h3>
-      <input onChange={onChange} onBlur={handleBlur} />
+      <input
+        ref={inputRef}
+        value={text}
+        onChange={onChange}
+        onBlur={handleBlur}
+        onKeyDown={checkEnterPressed}
+      />
     </div>
   )
 }

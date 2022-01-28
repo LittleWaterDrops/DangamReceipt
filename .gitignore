@@ -18,7 +18,7 @@ client/build
 .env.development.local
 .env.test.local
 .env.production.local
-server/config/.env
+server/src/config/.env
 
 client/npm-debug.log*
 server/npm-debug.log*
