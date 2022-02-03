@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Button from "../components/Button"
 import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
-import SampleModel from "../models/SampleModel.json"
 import Calendar from "react-calendar"
 import ToggleButton from "../components/ToggleButton"
+import { getMemberList } from "../api/API"
+import DropDown from "../components/DropDown"
+// import SampleModel from "../models/SampleModel.json"
 
 // const receiptModel = Convert.toReceiptModel(JSON.stringify(SampleModel))
 // const receivedData: Array<ReceiptModel> = SampleModel
@@ -23,6 +25,17 @@ const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
 function MainScreen() {
   const [receiptData, setReceiptData] = useState(initialData)
+  const [member, setMember] = useState([""])
+
+  useEffect(() => {
+    getMemberList().then((memberList) => {
+      let memberArray: string[] = []
+      for (const index in memberList) {
+        memberArray.push(memberList[index].name)
+      }
+      setMember(memberArray)
+    })
+  }, [])
 
   console.log(receiptData)
 
@@ -49,6 +62,11 @@ function MainScreen() {
 
           setReceiptData({ ...receiptData, paidAmount: parsedParameter })
         }}
+      />
+      <DropDown
+        title="사용자"
+        memberList={member}
+        setMember={(parameter) => setReceiptData({ ...receiptData, payer: parameter })}
       />
       <ToggleButton
         onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
