@@ -4,18 +4,14 @@ import DBConnection from "../db/DBConnection"
 const router = express.Router()
 
 router.get("/", (request: Request, response: Response) => {
-  response.send("hello, world")
-
   DBConnection.connect()
-
-  DBConnection.select()
-  // DBConnection.update()
-  // DBConnection.update2()
-  // DBConnection.end()
+  response.send("hello world!")
 })
 
-router.get("/hello/", (request: Request, response: Response) => {
-  response.send("kaka world!")
+router.get("/getMemberList/", (request: Request, response: Response) => {
+  DBConnection.query("SELECT * FROM DGmembers", (result?: any) => {
+    response.send(result)
+  })
 })
 
 export default router

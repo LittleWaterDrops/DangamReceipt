@@ -19,50 +19,31 @@ const createConnection: mysql.Connection = mysql.createConnection({
 // DB 컨트롤
 const DBControl = {
   connect: () => {
-    createConnection.connect((error) => {
-      if (error) {
-        console.log("error when connecting to db:", error)
-      }
-    })
+    if (createConnection.state != "authenticated") {
+      createConnection.connect((error) => {
+        if (error) {
+          console.log("error when connecting to db:", error)
+        }
+      })
+    }
   },
 
   end: () => {
-    createConnection.end((error) => {
-      if (error) {
-        console.log("error when ending to db:", error)
-      }
-    })
-  },
-
-  select: () => {
-    createConnection.query("SHOW TABLES", function (error, results, fields) {
-      if (error) {
-        console.log("error when query", error)
-      }
-      console.log(results)
-    })
-  },
-
-  update: () => {
-    createConnection.query(
-      "ALTER USER 'root'@'localhost' IDENTIFIED BY 'dg1q2w#E'",
-      function (error, results, fileds) {
+    if (createConnection.state != "disconnected") {
+      createConnection.end((error) => {
         if (error) {
-          console.log("error when query", error)
+          console.log("error when ending to db:", error)
         }
-        console.log("---------1")
-
-        console.log(results)
-      }
-    )
+      })
+    }
   },
-  update2: () => {
-    createConnection.query("FLUSH PRIVILEGES", function (error, results, fileds) {
+
+  query: (query: string, callback: any) => {
+    createConnection.query(`${query}`, function (error, results, field) {
       if (error) {
         console.log("error when query", error)
       }
-      console.log("---------2")
-      console.log(results)
+      callback(results)
     })
   },
 }
