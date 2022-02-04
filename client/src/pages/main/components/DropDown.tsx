@@ -1,4 +1,3 @@
-import React from "react"
 import { useState } from "react"
 import "../css/DropDown.css"
 type DropDownProps = {
@@ -8,7 +7,6 @@ type DropDownProps = {
 }
 
 function DropDown({ title, memberList, setMember }: DropDownProps) {
-  const dropDownRef = React.createRef<HTMLElement>()
   const [isActive, setIsActive] = useState(false)
   const [currentName, setCurrentName] = useState("")
 
