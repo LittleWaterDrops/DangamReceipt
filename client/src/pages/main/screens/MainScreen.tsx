@@ -4,31 +4,19 @@ import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
 import Calendar from "react-calendar"
 import ToggleButton from "../components/ToggleButton"
-import { getMemberList } from "../api/API"
+import { getMemberList, getUsageList, addUsage } from "../api/API"
 import DropDown from "../components/DropDown"
 import ChipSelector from "../components/ChipSelector"
-// import SampleModel from "../models/SampleModel.json"
 
-// const receiptModel = Convert.toReceiptModel(JSON.stringify(SampleModel))
-// const receivedData: Array<ReceiptModel> = SampleModel
-
-/**
-  receiptDate: Date 일자 - 완료
-  usageList: string[] 구분
-  paymentPlace: string 사용처 - 완료
-  content:string 내용 - 완료
-  paidAmount: number 금액 -완료
-  payer: string[] 사용자 - 완료
-  attendants: string[] 비고 
-  isProved: boolean 증빙 -완료
- */
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
 function MainScreen() {
   const [receiptData, setReceiptData] = useState(initialData)
   const [member, setMember] = useState([""])
+  const [usage, setUsage] = useState([""])
 
   useEffect(() => {
+    // 멤버 리스트 초기화
     getMemberList().then((memberList) => {
       let memberArray: string[] = []
       for (const index in memberList) {
@@ -36,14 +24,29 @@ function MainScreen() {
       }
       setMember(memberArray)
     })
+
+    // 비고 리스트 초기화
+    getUsageList().then((usageList) => {
+      let usageArray: string[] = []
+      for (const index in usageList) {
+        usageArray.push(usageList[index].usage)
+      }
+      setUsage(usageArray)
+    })
   }, [])
 
   console.log(receiptData)
 
+  // addUsage({ data: "hello" })
   return (
     <div>
       <Calendar
         onChange={(parameter: Date) => setReceiptData({ ...receiptData, receiptDate: parameter })}
+      />
+      <DropDown
+        title="구분"
+        memberList={usage}
+        setMember={(parameter) => setReceiptData({ ...receiptData, usageList: parameter })}
       />
       <TextInput
         title="사용처"

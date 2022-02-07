@@ -14,4 +14,22 @@ router.get("/getMemberList/", (request: Request, response: Response) => {
   })
 })
 
+router.get("/getUsageList/", (request: Request, response: Response) => {
+  DBConnection.query("SELECT * FROM usageList", (result?: any) => {
+    response.send(result)
+  })
+})
+
+router.post("/addUsage/", (request: Request, response: Response) => {
+  const usage = request.body.data
+
+  DBConnection.query(
+    "INSERT INTO usageList (`usage`) values(?)",
+    (result?: any) => {
+      response.send(result)
+    },
+    [usage]
+  )
+})
+
 export default router

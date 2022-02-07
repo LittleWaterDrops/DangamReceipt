@@ -38,13 +38,23 @@ const DBControl = {
     }
   },
 
-  query: (query: string, callback: any) => {
-    createConnection.query(`${query}`, function (error, results, field) {
-      if (error) {
-        console.log("error when query", error)
-      }
-      callback(results)
-    })
+  query: (query: string, callback: any, value?: any) => {
+    // 벨류 값 입력에 따른 판단
+    if (value != undefined) {
+      createConnection.query(`${query}`, value, function (error, results, field) {
+        if (error) {
+          console.log("error when query", error)
+        }
+        callback(results)
+      })
+    } else {
+      createConnection.query(`${query}`, function (error, results, field) {
+        if (error) {
+          console.log("error when query", error)
+        }
+        callback(results)
+      })
+    }
   },
 }
 
