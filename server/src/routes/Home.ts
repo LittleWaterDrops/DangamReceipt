@@ -20,16 +20,18 @@ router.get("/getUsageList/", (request: Request, response: Response) => {
   })
 })
 
+/* 삽입문, 현재 쓰이지 않음
 router.post("/addUsage/", (request: Request, response: Response) => {
   const usage = request.body.data
 
   DBConnection.query(
-    "INSERT INTO usageList (`usage`) values(?)",
+    "INSERT INTO card_usage_statement (`usage`) values(?)",
     (result?: any) => {
       response.send(result)
     },
     [usage]
   )
 })
+*/
 
 export default router

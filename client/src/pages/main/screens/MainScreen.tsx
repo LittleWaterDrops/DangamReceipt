@@ -37,7 +37,6 @@ function MainScreen() {
 
   console.log(receiptData)
 
-  // addUsage({ data: "hello" })
   return (
     <div>
       <Calendar
