@@ -15,3 +15,7 @@ export async function getUsageList() {
 export async function insertCardUseData(resultData: ReceiptModel) {
   return await axios.post("http://localhost:3001/home/insertCardUseData", resultData)
 }
+
+export async function getCardUseData() {
+  return (await axios.get("http://localhost:3001/management/getCardUseData")).data
+}
