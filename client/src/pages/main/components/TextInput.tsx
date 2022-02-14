@@ -1,14 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 type TextInputProps = {
   title: string
+  initialText: string
   inputType?: React.HTMLInputTypeAttribute | undefined
   returnValue: (text: string) => void
 }
 
-function TextInput({ title, inputType, returnValue }: TextInputProps) {
-  const [text, setText] = useState("")
+function TextInput({ title, initialText, inputType, returnValue }: TextInputProps) {
+  const [text, setText] = useState(initialText)
   const inputRef = React.createRef<HTMLInputElement>()
+
+  // 드롭다운에서 텍스트가 입력되었을 시 초기화
+  useEffect(() => {
+    setText(initialText)
+  }, [initialText])
 
   // 숫자를 입력받을 때 맨 앞 0을 제거한 숫자만 입력받도록 함
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

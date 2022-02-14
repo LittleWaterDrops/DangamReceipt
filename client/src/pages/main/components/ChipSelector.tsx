@@ -47,8 +47,6 @@ function ChipSelector({ title, memberList, setMember }: ChipSelectorProps) {
     setCurrentChips(chipsArray)
   }
 
-  console.log(currentChips)
-
   const selectedChips = currentChips.filter((item) => item.isSelected == true)
 
   return (
@@ -58,7 +56,7 @@ function ChipSelector({ title, memberList, setMember }: ChipSelectorProps) {
         <h3>
           {selectedChips.length == 0
             ? "선택해주세요."
-            : JSON.stringify(selectedChips.flatMap((item) => item.name))}
+            : selectedChips.flatMap((item) => item.name).join()}
         </h3>
       </button>
       <div className={`menu ${isActive ? "active" : "inactive"}`}>

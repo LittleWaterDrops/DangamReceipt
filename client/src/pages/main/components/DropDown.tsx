@@ -1,28 +1,35 @@
 import { useState } from "react"
 import "../css/DropDown.css"
+import TextInput from "./TextInput"
 type DropDownProps = {
   title: string
   memberList: string[]
-  setMember: (member: string[]) => void
+  returnValue: (member: string[]) => void
 }
 
-function DropDown({ title, memberList, setMember }: DropDownProps) {
+function DropDown({ title, memberList, returnValue }: DropDownProps) {
   const [isActive, setIsActive] = useState(false)
   const [currentName, setCurrentName] = useState("")
 
+  // 드롭다운 활성 상태 토글
   const dropDownToggle = () => {
     setIsActive(!isActive)
   }
 
+  // 아이템이 클릭됨을 감지
   const itemClick = (item: string) => {
     setCurrentName(item)
     setIsActive(!isActive)
-    setMember([item])
+    returnValue([item])
   }
 
   return (
     <div className="menu-container">
-      <h3>{title}</h3>
+      <TextInput
+        title={title}
+        initialText={currentName}
+        returnValue={(parameter) => returnValue([parameter])}
+      />
       <button onClick={dropDownToggle}>
         <h3>{currentName == "" ? "선택해주세요." : currentName}</h3>
       </button>
