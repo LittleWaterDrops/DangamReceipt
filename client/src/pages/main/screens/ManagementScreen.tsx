@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getCardUseData } from "../api/API"
-import FlatList from "../components/FlatList"
+import Table from "../components/Table"
 import { CardUseDataModel } from "../models/CardUseDataModel"
 
 const initialData: CardUseDataModel = {} as CardUseDataModel
@@ -20,7 +20,7 @@ function ManagementScreen() {
       <nav>
         <Link to="/">메인 페이지로</Link>
       </nav>
-      {!isEmpty(cardUseData[0]) && <FlatList items={cardUseData} />}
+      {!isEmpty(cardUseData[0]) && <Table items={cardUseData} />}
     </div>
   )
 }

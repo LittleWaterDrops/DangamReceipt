@@ -100,9 +100,9 @@ function SubmitData(dataToSubmit: ReceiptModel) {
     Convert.receiptModelToJson([dataToSubmit])
 
     insertCardUseData(dataToSubmit)
-    console.log("success")
+    alert("success")
   } catch (e: any) {
-    console.log("failed - ", e)
+    alert("failed - " + e)
   }
 }
 
