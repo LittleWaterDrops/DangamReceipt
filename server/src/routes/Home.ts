@@ -1,6 +1,7 @@
 import { ReceiptModel } from "./../../../client/src/pages/main/models/ReceiptModel"
 import express, { Request, Response } from "express"
 import DBConnection from "../db/DBConnection"
+import DBTables from "../db/DBTables"
 
 const router = express.Router()
 
@@ -10,13 +11,13 @@ router.get("/", (request: Request, response: Response) => {
 })
 
 router.get("/getMemberList/", (request: Request, response: Response) => {
-  DBConnection.query("SELECT * FROM DGmembers", (result?: any) => {
+  DBConnection.query(`SELECT * FROM ${DBTables.MEMBER_LIST}`, (result?: any) => {
     response.send(result)
   })
 })
 
 router.get("/getUsageList/", (request: Request, response: Response) => {
-  DBConnection.query("SELECT * FROM card_usage_statement", (result?: any) => {
+  DBConnection.query(`SELECT * FROM ${DBTables.USAGE_LIST}`, (result?: any) => {
     response.send(result)
   })
 })
@@ -35,7 +36,7 @@ router.post("/insertCardUseData/", (request: Request, response: Response) => {
   ]
 
   DBConnection.query(
-    "INSERT INTO DGcard_copy (`일자`,`구분`,`사용처`,`내용`,`금액`,`사용자`,`비고`) values(?)",
+    `INSERT INTO ${DBTables.USE_DATA} (일자,구분,사용처,내용,금액,사용자,비고) values(?)`,
     (result?: any) => {
       response.send(result)
     },
