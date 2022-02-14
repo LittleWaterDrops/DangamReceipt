@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 type TextInputProps = {
   text: string
   onClicked: () => void

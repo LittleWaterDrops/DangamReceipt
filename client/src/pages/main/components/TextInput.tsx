@@ -18,7 +18,7 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
 
   // 숫자를 입력받을 때 맨 앞 0을 제거한 숫자만 입력받도록 함
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    inputType == "number"
+    inputType === "number"
       ? setText(e.target.value.replace(/^0+/, "").replace(/\D/, ""))
       : setText(e.target.value)
   }

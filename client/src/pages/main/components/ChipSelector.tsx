@@ -47,14 +47,14 @@ function ChipSelector({ title, memberList, setMember }: ChipSelectorProps) {
     setCurrentChips(chipsArray)
   }
 
-  const selectedChips = currentChips.filter((item) => item.isSelected == true)
+  const selectedChips = currentChips.filter((item) => item.isSelected === true)
 
   return (
     <div className="menu-container">
       <h3>{title}</h3>
       <button onClick={chipSelectorToggle}>
         <h3>
-          {selectedChips.length == 0
+          {selectedChips.length === 0
             ? "선택해주세요."
             : selectedChips.flatMap((item) => item.name).join()}
         </h3>

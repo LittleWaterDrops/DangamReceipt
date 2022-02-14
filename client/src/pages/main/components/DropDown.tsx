@@ -31,7 +31,7 @@ function DropDown({ title, memberList, returnValue }: DropDownProps) {
         returnValue={(parameter) => returnValue([parameter])}
       />
       <button onClick={dropDownToggle}>
-        <h3>{currentName == "" ? "선택해주세요." : currentName}</h3>
+        <h3>{currentName === "" ? "선택해주세요." : currentName}</h3>
       </button>
       <div className={`menu ${isActive ? "active" : "inactive"}`}>
         {isActive &&
