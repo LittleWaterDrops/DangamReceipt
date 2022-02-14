@@ -9,9 +9,9 @@ import { getMemberList, getUsageList, insertCardUseData } from "../api/API"
 import DropDown from "../components/DropDown"
 import ChipSelector from "../components/ChipSelector"
 import moment from "moment"
+import { Link } from "react-router-dom"
 
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
-
 function MainScreen() {
   const [receiptData, setReceiptData] = useState(initialData)
   const [member, setMember] = useState([""])
@@ -41,6 +41,9 @@ function MainScreen() {
 
   return (
     <div>
+      <nav>
+        <Link to="/manage">To manage</Link>
+      </nav>
       <Calendar
         onChange={(parameter: Date) =>
           setReceiptData({ ...receiptData, receiptDate: moment(parameter).format("YYYY-MM-DD") })

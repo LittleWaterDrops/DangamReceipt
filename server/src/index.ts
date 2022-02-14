@@ -17,5 +17,4 @@ app.listen(port, () => {
 })
 
 // 라우터 설정
-app.use("/", HomerRouter)
-app.use("/hello/", HomerRouter)
+app.use("/home/", HomerRouter)
