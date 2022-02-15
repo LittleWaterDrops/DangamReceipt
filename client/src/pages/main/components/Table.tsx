@@ -67,6 +67,7 @@ function Table({ items, getSelectedNumber }: TableProps) {
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
+            <h4>선택</h4>
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
@@ -87,6 +88,7 @@ function Table({ items, getSelectedNumber }: TableProps) {
               <td>
                 <input
                   type={"radio"}
+                  value={"radio"}
                   onChange={() => {
                     rowClicked(row.index, row.values.No)
                   }}
