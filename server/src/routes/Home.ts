@@ -25,7 +25,7 @@ router.get("/getUsageList/", (request: Request, response: Response) => {
 router.post("/insertCardUseData/", (request: Request, response: Response) => {
   const requestBody: ReceiptModel = request.body
 
-  const reuslt = [
+  const result = [
     requestBody.receiptDate,
     requestBody.usageList[0],
     requestBody.paymentPlace,
@@ -40,7 +40,7 @@ router.post("/insertCardUseData/", (request: Request, response: Response) => {
     (result?: any) => {
       response.send(result)
     },
-    [reuslt]
+    [result]
   )
 })
 

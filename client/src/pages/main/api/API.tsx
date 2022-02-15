@@ -1,5 +1,6 @@
 import axios from "axios"
 import { ReceiptModel } from "./../../../pages/main/models/ReceiptModel"
+import { CardUseDataModel } from "./../../../pages/main/models/CardUseDataModel"
 
 // 멤버 리스트 관련
 export async function getMemberList() {
@@ -18,4 +19,16 @@ export async function insertCardUseData(resultData: ReceiptModel) {
 
 export async function getCardUseData() {
   return (await axios.get("http://localhost:3001/management/getCardUseData")).data
+}
+
+export async function updateCardUseDataWithNumber(resultData: CardUseDataModel) {
+  return await axios.post("http://localhost:3001/management/updateCardUseDataWithIndex", {
+    resultData,
+  })
+}
+
+export async function deleteCardUseDataWithNumber(deleteNumber: number) {
+  return await axios.post("http://localhost:3001/management/deleteCardUseDataWithNumber", {
+    deleteNumber: deleteNumber,
+  })
 }
