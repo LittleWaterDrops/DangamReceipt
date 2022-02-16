@@ -15,7 +15,7 @@ export const isEmpty = (object: any) => {
 function ManagementScreen() {
   const [cardUseData, setCardUseData] = useState([initialData])
   const [selectedNumber, setSelectedNumber] = useState(Number)
-
+  const [isInit, setIsInit] = useState(false)
   // selectedNumber 초기화
   useEffect(() => {
     setSelectedNumber(cardUseData[0].No)
@@ -25,13 +25,15 @@ function ManagementScreen() {
   useEffect(() => {
     getCardUseData().then((cardUseData) => {
       setCardUseData(cardUseData)
+      setIsInit(true)
     })
-  }, [])
+  }, [isInit])
 
   // 데이터 삭제 함수
   const dataDelete = () => {
     console.log("delete" + selectedNumber)
     deleteCardUseDataWithNumber(selectedNumber)
+    setIsInit(false)
   }
 
   return (
@@ -39,7 +41,7 @@ function ManagementScreen() {
       <nav>
         <Link to="/">메인 페이지로</Link>
       </nav>
-      {!isEmpty(cardUseData[0]) && (
+      {isInit && (
         <>
           <Table
             items={cardUseData}
@@ -48,12 +50,14 @@ function ManagementScreen() {
           <Link to={`/addData/${selectedNumber}`}>
             <Button text={"수정"} onClicked={() => {}} />
           </Link>
-          <Button
-            text={"삭제"}
-            onClicked={() => {
-              dataDelete()
-            }}
-          />
+          <Link to={`/manage`}>
+            <Button
+              text={"삭제"}
+              onClicked={() => {
+                dataDelete()
+              }}
+            />
+          </Link>
         </>
       )}
     </div>
