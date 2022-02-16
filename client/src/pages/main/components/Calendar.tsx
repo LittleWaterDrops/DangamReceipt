@@ -22,7 +22,7 @@ function Calendar({ initialText, returnValue }: CalendarProps) {
     <>
       <h3>{selectedDate ? "선택된 날짜: " + selectedDate : "날짜를 선택해주세요."}</h3>
       <ReactCalendar
-        value={new Date(initialText)}
+        value={initialText ? new Date(initialText) : null}
         onChange={(parameter: Date) => returnValue(moment(parameter).format("YYYY-MM-DD"))}
       />
     </>
