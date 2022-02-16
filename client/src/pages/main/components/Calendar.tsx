@@ -18,12 +18,18 @@ function Calendar({ initialText, returnValue }: CalendarProps) {
     }
   }, [initialText])
 
+  // 날짜가 클릭되었을 시 선택된 날짜 설정 및 값 리턴
+  const onChange = (selectedDate: Date) => {
+    setSelectedDate(moment(selectedDate).format("YYYY-MM-DD"))
+    returnValue(moment(selectedDate).format("YYYY-MM-DD"))
+  }
+
   return (
     <>
       <h3>{selectedDate ? "선택된 날짜: " + selectedDate : "날짜를 선택해주세요."}</h3>
       <ReactCalendar
-        value={initialText ? new Date(initialText) : null}
-        onChange={(parameter: Date) => returnValue(moment(parameter).format("YYYY-MM-DD"))}
+        value={selectedDate ? new Date(selectedDate) : null}
+        onChange={(parameter: Date) => onChange(parameter)}
       />
     </>
   )
