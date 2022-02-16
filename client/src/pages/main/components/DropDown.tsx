@@ -3,13 +3,14 @@ import "../css/DropDown.css"
 import TextInput from "./TextInput"
 type DropDownProps = {
   title: string
+  initialText: string
   memberList: string[]
   returnValue: (member: string[]) => void
 }
 
-function DropDown({ title, memberList, returnValue }: DropDownProps) {
+function DropDown({ title, initialText, memberList, returnValue }: DropDownProps) {
   const [isActive, setIsActive] = useState(false)
-  const [currentName, setCurrentName] = useState("")
+  const [currentName, setCurrentName] = useState(initialText)
 
   // 드롭다운 활성 상태 토글
   const dropDownToggle = () => {

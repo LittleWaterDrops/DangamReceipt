@@ -67,7 +67,9 @@ function Table({ items, getSelectedNumber }: TableProps) {
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            <h4>선택</h4>
+            <th>
+              <h4>선택</h4>
+            </th>
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}

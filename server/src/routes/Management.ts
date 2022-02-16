@@ -10,6 +10,20 @@ router.get("/getCardUseData/", (request: Request, response: Response) => {
     response.send(result)
   })
 })
+router.get("/getCardUseData/:dataNumber", (request: Request, response: Response) => {
+  DBConnection.query(
+    `SELECT * FROM ${DBTables.USE_DATA} WHERE NO = ${request.params.dataNumber}`,
+    (result?: any) => {
+      response.send(result)
+    }
+  )
+})
+
+router.get("/getCardUseDataByNumber/", (request: Request, response: Response) => {
+  DBConnection.query(`SELECT * FROM ${DBTables.USE_DATA} WHERE NO = ${request}`, (result?: any) => {
+    response.send(result)
+  })
+})
 
 router.post("/deleteCardUseDataWithNumber/", (request: Request, response: Response) => {
   DBConnection.query(

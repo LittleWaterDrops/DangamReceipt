@@ -21,6 +21,10 @@ export async function getCardUseData() {
   return (await axios.get("http://localhost:3001/management/getCardUseData")).data
 }
 
+export async function getCardUseDataByNumber(params: string | undefined) {
+  return (await axios.get(`http://localhost:3001/management/getCardUseData/${params}`)).data
+}
+
 export async function updateCardUseDataWithNumber(resultData: CardUseDataModel) {
   return await axios.post("http://localhost:3001/management/updateCardUseDataWithIndex", {
     resultData,

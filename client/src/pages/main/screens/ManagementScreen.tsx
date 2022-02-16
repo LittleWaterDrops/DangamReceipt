@@ -14,8 +14,12 @@ const isEmpty = (object: any) => {
 
 function ManagementScreen() {
   const [cardUseData, setCardUseData] = useState([initialData])
-  // plus one => 기존 인덱스에서 1을 더해야 데이터의 No로 확인 가능
   const [selectedNumber, setSelectedNumber] = useState(Number)
+
+  // selectedNumber 초기화
+  useEffect(() => {
+    setSelectedNumber(cardUseData[0].No)
+  }, [cardUseData])
 
   // 카드 사용 내역 데이터 호출
   useEffect(() => {
@@ -23,9 +27,6 @@ function ManagementScreen() {
       setCardUseData(cardUseData)
     })
   }, [])
-
-  // 데이터 수정 함수
-  const dataUpdate = () => {}
 
   // 데이터 삭제 함수
   const dataDelete = () => {
@@ -44,13 +45,8 @@ function ManagementScreen() {
             items={cardUseData}
             getSelectedNumber={(parameter: number) => setSelectedNumber(parameter)}
           />
-          <Link to="/addData">
-            <Button
-              text={"수정"}
-              onClicked={() => {
-                dataUpdate()
-              }}
-            />
+          <Link to={`/addData/${selectedNumber}`}>
+            <Button text={"수정"} onClicked={() => {}} />
           </Link>
           <Button
             text={"삭제"}

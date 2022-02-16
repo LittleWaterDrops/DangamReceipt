@@ -12,6 +12,7 @@ const App: React.FC = () => {
         <Route path="/" element={<MainScreen />} />
         <Route path="/addData" element={<AddDataScreen />} />
         <Route path="/manage" element={<ManagementScreen />} />
+        <Route path="/addData/:dataNumber" element={<AddDataScreen />} />
       </Routes>
     </div>
   )
