@@ -130,7 +130,9 @@ function AddDataScreen() {
           <ToggleButton
             onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
           />
-          <Button text="등록" onClicked={() => SubmitData(receiptData, routerParameter)} />
+          <Link to={routerParameter.dataNumber ? "/manage" : "/"}>
+            <Button text="등록" onClicked={() => SubmitData(receiptData, routerParameter)} />
+          </Link>
         </>
       )}
     </div>
