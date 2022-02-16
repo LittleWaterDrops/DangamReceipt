@@ -8,7 +8,7 @@ import { CardUseDataModel } from "../models/CardUseDataModel"
 const initialData: CardUseDataModel = {} as CardUseDataModel
 
 // 오브젝트가 비어있음을 확인
-const isEmpty = (object: any) => {
+export const isEmpty = (object: any) => {
   return !Object.keys(object).length
 }
 

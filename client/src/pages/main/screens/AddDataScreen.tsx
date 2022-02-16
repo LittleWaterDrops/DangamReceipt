@@ -4,12 +4,20 @@ import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
 import "react-calendar/dist/Calendar.css"
 import ToggleButton from "../components/ToggleButton"
-import { getCardUseDataByNumber, getMemberList, getUsageList, insertCardUseData } from "../api/API"
+import {
+  getCardUseDataByNumber,
+  getMemberList,
+  getUsageList,
+  insertCardUseData,
+  updateCardDataProps,
+  updateCardUseDataWithNumber,
+} from "../api/API"
 import DropDown from "../components/DropDown"
 import ChipSelector from "../components/ChipSelector"
 import { Link, Params, useParams } from "react-router-dom"
 import { CardUseDataModel } from "../models/CardUseDataModel"
 import Calendar from "../components/Calendar"
+import { isEmpty } from "./ManagementScreen"
 
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
@@ -133,9 +141,20 @@ function SubmitData(dataToSubmit: ReceiptModel, routerParameter: Readonly<Params
   try {
     Convert.receiptModelToJson([dataToSubmit])
 
-    console.log(routerParameter)
+    // 새로 추가하는 데이터인 경우
+    if (isEmpty(routerParameter)) {
+      insertCardUseData(dataToSubmit)
+    }
+    // 수정하는 데이터인 경우
+    else {
+      const resultData: updateCardDataProps = {
+        submitData: dataToSubmit,
+        dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
+      }
 
-    insertCardUseData(dataToSubmit)
+      updateCardUseDataWithNumber(resultData)
+    }
+
     alert("success")
   } catch (e: any) {
     alert("failed - " + e)

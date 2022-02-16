@@ -1,7 +1,10 @@
 import axios from "axios"
 import { ReceiptModel } from "./../../../pages/main/models/ReceiptModel"
-import { CardUseDataModel } from "./../../../pages/main/models/CardUseDataModel"
 
+export type updateCardDataProps = {
+  submitData: ReceiptModel
+  dataNumber: number
+}
 // 멤버 리스트 관련
 export async function getMemberList() {
   return (await axios.get("http://localhost:3001/home/getMemberList")).data
@@ -25,8 +28,8 @@ export async function getCardUseDataByNumber(params: string | undefined) {
   return (await axios.get(`http://localhost:3001/management/getCardUseData/${params}`)).data
 }
 
-export async function updateCardUseDataWithNumber(resultData: CardUseDataModel) {
-  return await axios.post("http://localhost:3001/management/updateCardUseDataWithIndex", {
+export async function updateCardUseDataWithNumber(resultData: updateCardDataProps) {
+  return await axios.post("http://localhost:3001/management/updateCardUseDataWithNumber", {
     resultData,
   })
 }
