@@ -2,15 +2,14 @@ import { useEffect, useState } from "react"
 import Button from "../components/Button"
 import TextInput from "../components/TextInput"
 import { Convert, ReceiptModel } from "../models/ReceiptModel"
-import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import ToggleButton from "../components/ToggleButton"
 import { getCardUseDataByNumber, getMemberList, getUsageList, insertCardUseData } from "../api/API"
 import DropDown from "../components/DropDown"
 import ChipSelector from "../components/ChipSelector"
-import moment from "moment"
 import { Link, Params, useParams } from "react-router-dom"
 import { CardUseDataModel } from "../models/CardUseDataModel"
+import Calendar from "../components/Calendar"
 
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
@@ -76,14 +75,9 @@ function AddDataScreen() {
           <nav>
             <Link to="/">메인 페이지로</Link>
           </nav>
-          <h3>날짜</h3>
           <Calendar
-            onChange={(parameter: Date) =>
-              setReceiptData({
-                ...receiptData,
-                receiptDate: moment(parameter).format("YYYY-MM-DD"),
-              })
-            }
+            initialText={routerParameter.dataNumber ? receiptData.receiptDate : ""}
+            returnValue={(parameter) => setReceiptData({ ...receiptData, receiptDate: parameter })}
           />
           <DropDown
             title="구분"
