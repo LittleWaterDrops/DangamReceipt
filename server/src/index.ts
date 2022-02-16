@@ -3,6 +3,7 @@ import morgan from "morgan"
 import cors from "cors"
 import HomeRouter from "./routes/Home"
 import ManagementRouter from "./routes/Management"
+import path from "path/posix"
 
 const app: express.Application = express()
 const port: number = 3001
@@ -12,6 +13,8 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan("dev"))
+
+app.use(express.static(path.join(__dirname, "../../buildFile/build")))
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}! \n`)
