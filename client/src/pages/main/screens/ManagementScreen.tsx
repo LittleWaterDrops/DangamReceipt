@@ -48,7 +48,11 @@ function ManagementScreen() {
             getSelectedNumber={(parameter: number) => setSelectedNumber(parameter)}
           />
           <Link to={`/addData/${selectedNumber}`}>
-            <Button text={"수정"} onClicked={() => {}} />
+            <Button
+              text={"수정"}
+              onClicked={() => {}}
+              onHovered={function (isHovered: boolean): void {}}
+            />
           </Link>
           <Link to={`/manage`}>
             <Button
@@ -56,6 +60,7 @@ function ManagementScreen() {
               onClicked={() => {
                 dataDelete()
               }}
+              onHovered={function (isHovered: boolean): void {}}
             />
           </Link>
         </>

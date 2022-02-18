@@ -131,7 +131,11 @@ function AddDataScreen() {
             onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
           />
           <Link to={routerParameter.dataNumber ? "/manage" : "/"}>
-            <Button text="등록" onClicked={() => SubmitData(receiptData, routerParameter)} />
+            <Button
+              text="등록"
+              onClicked={() => SubmitData(receiptData, routerParameter)}
+              onHovered={function (isHovered: boolean): void {}}
+            />
           </Link>
         </>
       )}
