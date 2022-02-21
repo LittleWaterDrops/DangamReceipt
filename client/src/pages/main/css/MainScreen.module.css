@@ -36,7 +36,7 @@
   padding-top: 12rem;
   padding-bottom: 0.5rem;
   font-size: 4rem;
-  font-weight: lighter;
+  font-weight: bold;
   letter-spacing: 12px;
   color: var(--title-color);
   border: 0px solid var(--line-color);
@@ -114,5 +114,7 @@
 
 .copywriteText {
   text-align: end;
+  /* font-size: 2rem; */
+  font-weight: lighter;
   color: whitesmoke;
 }
