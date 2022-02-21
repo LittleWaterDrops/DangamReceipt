@@ -1,5 +1,9 @@
 :root {
-  --primary-color: #fa9a6b;
-
-  --secondary-color: #d69e6d;
+  --primary-color: #f2784b;
+  --sub-primary-color: #afd5d8;
+  --secondary-color: #f2a25c;
+  --title-color: rgb(97, 96, 96);
+  --line-color: rgb(197, 195, 195);
+  --pink: #f2c1b6;
+  --green: #b6bf95;
 }

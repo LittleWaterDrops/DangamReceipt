@@ -3,52 +3,116 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.subContainer {
+  display: flex;
+  flex: 0.3;
+  flex-direction: column;
+  background-color: var(--primary-color);
+}
+
+.mainContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.nonInitContainer {
+  opacity: 0;
 }
 
 .welcomeText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
   padding-top: 12rem;
   padding-bottom: 0.5rem;
   font-size: 4rem;
-  color: white;
-  background: var(--primary-color);
-  width: 100%;
+  font-weight: lighter;
+  letter-spacing: 12px;
+  color: var(--title-color);
+  border: 0px solid var(--line-color);
+  border-bottom-width: 1px;
+  transition: opacity 400ms;
+}
+
+.textField {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  border: 0px solid var(--line-color);
+  border-bottom-width: 1px;
+}
+
+.informationText {
+  padding: 0px;
+  margin: 0px;
+  font-size: 2rem;
+  font-weight: lighter;
+  transition: opacity 400ms;
+}
+
+.paidAmountText {
+  padding: 0px;
+  margin: 0px;
+  margin-right: 8px;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: var(--primary-color);
+  transition: opacity 400ms;
+  transition-delay: 400ms;
 }
 
 .linkText {
+  padding: 0px;
+  margin: 0px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: normal;
   text-decoration: none;
-  margin-top: 2rem;
-  padding: 1rem;
-  padding-left: 6rem;
-  padding-right: 6rem;
+  border: 0px;
 
-  color: var(--secondary-color);
-  border: 2px solid var(--secondary-color);
-  opacity: 0.8;
-
-  border-radius: 3rem;
+  color: var(--primary-color);
   background-color: white;
+  transition: opacity 400ms;
+  transition-delay: 800ms;
 }
 
 .linkTextHovered {
+  padding: 0px;
+  margin: 0px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: normal;
   text-decoration: none;
-  margin-top: 2rem;
-  padding: 1rem;
-  padding-left: 6rem;
-  padding-right: 6rem;
+  border: 0px;
 
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-
-  border-radius: 3rem;
+  color: var(--sub-primary-color);
   background-color: white;
+}
+
+.footer {
+  width: 100%;
+  justify-content: baseline;
+  height: 100px;
+  background-color: black;
+}
+
+.copywriteText {
+  text-align: end;
+  color: whitesmoke;
 }

@@ -40,3 +40,7 @@ export async function deleteCardUseDataWithNumber(deleteNumber: number) {
     deleteNumber: deleteNumber,
   })
 }
+
+export async function getSumPaidAmount() {
+  return (await axios.get(`${SERVER_CONFIG.URL}/management/getSumPaidAmount`)).data[0]
+}
