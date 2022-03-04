@@ -6,7 +6,6 @@ import DBTables from "../db/DBTables"
 const router = express.Router()
 
 router.get("/", (request: Request, response: Response) => {
-  DBConnection.connect()
   response.send("hello world!")
 })
 
