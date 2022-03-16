@@ -2,6 +2,7 @@ import { updateCardDataProps } from "./../../../client/src/pages/main/api/API"
 import express, { Request, Response } from "express"
 import DBConnection from "../db/DBConnection"
 import DBTables from "../db/DBTables"
+import { spawn } from "child_process"
 
 const router = express.Router()
 
@@ -61,6 +62,19 @@ router.get("/getSumPaidAmount/", (request: Request, response: Response) => {
   DBConnection.query(`SELECT SUM(금액) FROM ${DBTables.USE_DATA}`, (result?: any) => {
     const paidAmount = Object.values(result[0])
     response.send(paidAmount)
+  })
+})
+
+router.get("/downloadXSLX/", (request: Request, response: Response) => {
+  const pythonDirection: string = `test_python.py`
+  const fileToDownload: string = `test_python.py`
+  const python = spawn("python3", [pythonDirection])
+  python.on("close", (code) => {
+    response.download(fileToDownload)
+  })
+
+  python.stderr.on("data", function (data) {
+    console.log("python download error!")
   })
 })
 

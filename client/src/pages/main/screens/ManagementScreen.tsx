@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { deleteCardUseDataWithNumber, getCardUseData } from "../api/API"
+import { deleteCardUseDataWithNumber, getCardUseData, downloadXSLX } from "../api/API"
 import Button from "../components/Button"
 import Table from "../components/Table"
 import { CardUseDataModel } from "../models/CardUseDataModel"
+import fileDownload from "js-file-download"
 
 const initialData: CardUseDataModel = {} as CardUseDataModel
 
@@ -63,6 +64,16 @@ function ManagementScreen() {
               onHovered={function (isHovered: boolean): void {}}
             />
           </Link>
+          <Button
+            text={"엑셀 파일 다운로드"}
+            onClicked={() => {
+              downloadXSLX().then((result) => {
+                console.log(result)
+                fileDownload(result.data, "test_python.py")
+              })
+            }}
+            onHovered={function (isHovered: boolean): void {}}
+          />
         </>
       )}
     </div>

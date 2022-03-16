@@ -44,3 +44,9 @@ export async function deleteCardUseDataWithNumber(deleteNumber: number) {
 export async function getSumPaidAmount() {
   return (await axios.get(`${SERVER_CONFIG.URL}/management/getSumPaidAmount`)).data[0]
 }
+
+export async function downloadXSLX() {
+  return await axios.get(`${SERVER_CONFIG.URL}/management/downloadXSLX`, {
+    responseType: "blob",
+  })
+}
