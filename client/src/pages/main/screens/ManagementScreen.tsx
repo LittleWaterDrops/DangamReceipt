@@ -39,9 +39,6 @@ function ManagementScreen() {
 
   return (
     <div>
-      <nav>
-        <Link to="/">메인 페이지로</Link>
-      </nav>
       {isInit && (
         <>
           <Table

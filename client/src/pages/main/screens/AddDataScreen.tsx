@@ -80,9 +80,6 @@ function AddDataScreen() {
     <div>
       {isInit && (
         <>
-          <nav>
-            <Link to="/">메인 페이지로</Link>
-          </nav>
           <Calendar
             initialText={routerParameter.dataNumber ? receiptData.receiptDate : ""}
             returnValue={(parameter) => setReceiptData({ ...receiptData, receiptDate: parameter })}
