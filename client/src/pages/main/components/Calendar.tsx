@@ -1,7 +1,7 @@
 import moment from "moment"
 import { useEffect, useState } from "react"
 import ReactCalendar from "react-calendar"
-import "react-calendar/dist/Calendar.css"
+import "../css/Calendar.css"
 
 type CalendarProps = {
   initialText: string | Date
@@ -28,6 +28,7 @@ function Calendar({ initialText, returnValue }: CalendarProps) {
     <>
       <h3>{selectedDate ? "선택된 날짜: " + selectedDate : "날짜를 선택해주세요."}</h3>
       <ReactCalendar
+        className="react-calendar"
         value={selectedDate ? new Date(selectedDate) : null}
         onChange={(parameter: Date) => onChange(parameter)}
       />
