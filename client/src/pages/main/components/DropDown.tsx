@@ -1,11 +1,17 @@
 import { useState } from "react"
 import "../css/DropDown.css"
+import Button from "./Button"
 import TextInput from "./TextInput"
+import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai"
 type DropDownProps = {
   title: string
   initialText: string
   memberList: string[]
   returnValue: (member: string[]) => void
+}
+
+type MenuItemProps = {
+  itemName: string
 }
 
 function DropDown({ title, initialText, memberList, returnValue }: DropDownProps) {
@@ -24,25 +30,42 @@ function DropDown({ title, initialText, memberList, returnValue }: DropDownProps
     returnValue([item])
   }
 
+  const MenuItem = ({ itemName }: MenuItemProps) => {
+    const [isHovered, setIsHovered] = useState(false)
+
+    return (
+      <div className={isHovered ? "menu-item-hovered" : "menu-item"}>
+        <div
+          onClick={() => itemClick(itemName)}
+          onMouseEnter={() => {
+            setIsHovered(true)
+          }}
+          onMouseLeave={() => {
+            setIsHovered(false)
+          }}
+        >
+          {itemName}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="menu-container">
-      <TextInput
-        title={title}
-        initialText={currentName}
-        returnValue={(parameter) => returnValue([parameter])}
-      />
-      <button onClick={dropDownToggle}>
-        <h3>{currentName === "" ? "선택해주세요." : currentName}</h3>
-      </button>
-      <div className={`menu ${isActive ? "active" : "inactive"}`}>
-        {isActive &&
-          memberList.map((item) => {
-            return (
-              <li key={item} style={{ height: "250px", border: "1px solid black" }}>
-                <div onClick={() => itemClick(item)}>{item}</div>
-              </li>
-            )
-          })}
+      <div className="text-icon-field">
+        <TextInput
+          title={title}
+          initialText={currentName}
+          returnValue={(parameter) => returnValue([parameter])}
+        />
+        <button onClick={dropDownToggle}>
+          {isActive ? <AiFillCaretDown /> : <AiFillCaretRight />}
+        </button>
+      </div>
+      <div className={`menu${isActive ? "-active" : ""}`}>
+        {memberList.map((item) => (
+          <MenuItem itemName={item} key={item} />
+        ))}
       </div>
     </div>
   )
