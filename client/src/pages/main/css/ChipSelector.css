@@ -1,42 +1,30 @@
 .menu-container {
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
-.menu {
-  height: 0;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+.chip-container {
+  width: 35em;
+  margin-top: 5px;
 }
 
-.menu.active {
-  font-size: 18px;
-  line-height: 1.6;
-  height: 120px;
-  background: "white";
-  width: 300px;
-  overflow: scroll;
-
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.sub-text {
+  font-size: medium;
+  width: 35em;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+  margin-top: -5px;
+  padding-bottom: 5px;
+  color: grey;
 }
 
-.menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu li {
-  border-bottom: 1px solid #dddddd;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: #333333;
-  padding: 15px 20px;
-  display: block;
+.sub-text-selected {
+  font-size: medium;
+  width: 35em;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+  margin-top: -5px;
+  padding-bottom: 5px;
+  color: black;
 }

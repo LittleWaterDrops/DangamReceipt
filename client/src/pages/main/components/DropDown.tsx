@@ -1,6 +1,5 @@
 import { useState } from "react"
 import "../css/DropDown.css"
-import Button from "./Button"
 import TextInput from "./TextInput"
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai"
 type DropDownProps = {

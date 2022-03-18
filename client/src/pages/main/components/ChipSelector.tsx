@@ -9,7 +9,6 @@ type ChipSelectorProps = {
 }
 
 function ChipSelector({ title, initialSelectedMember, memberList, setMember }: ChipSelectorProps) {
-  const [isActive, setIsActive] = useState(false)
   const [currentChips, setCurrentChips] = useState<ChipProps[]>([])
   const [selectedMember, setSelectedMember] = useState([""])
 
@@ -45,11 +44,6 @@ function ChipSelector({ title, initialSelectedMember, memberList, setMember }: C
     setMember(chipsNameArray)
   }, [currentChips])
 
-  // 칩 리스트를 보일지 결정
-  const chipSelectorToggle = () => {
-    setIsActive(!isActive)
-  }
-
   // 선택된 칩 상태 변경
   const itemSelectStateToggle = (index: number) => {
     let chipsArray = [...currentChips]
@@ -63,14 +57,12 @@ function ChipSelector({ title, initialSelectedMember, memberList, setMember }: C
   return (
     <div className="menu-container">
       <h3>{title}</h3>
-      <button onClick={chipSelectorToggle}>
-        <h3>
-          {selectedChips.length === 0
-            ? "선택해주세요."
-            : selectedChips.flatMap((item) => item.name).join()}
-        </h3>
-      </button>
-      <div className={`menu ${isActive ? "active" : "inactive"}`}>
+      <div className={selectedChips.length === 0 ? "sub-text" : "sub-text-selected"}>
+        {selectedChips.length === 0
+          ? "참석자를 모두 선택해주세요."
+          : "참석자 : " + selectedChips.flatMap((item) => item.name).join()}
+      </div>
+      <div className={"chip-container"}>
         {currentChips &&
           currentChips.map((item) => {
             return (
