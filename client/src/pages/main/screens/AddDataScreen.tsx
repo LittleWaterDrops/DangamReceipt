@@ -18,6 +18,7 @@ import { Link, Params, useParams } from "react-router-dom"
 import { CardUseDataModel } from "../models/CardUseDataModel"
 import Calendar from "../components/Calendar"
 import { isEmpty } from "./ManagementScreen"
+import styles from "../css/AddDataScreen.module.css"
 
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
@@ -127,11 +128,15 @@ function AddDataScreen() {
           <ToggleButton
             onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
           />
-          <Link to={routerParameter.dataNumber ? "/manage" : "/"}>
+          <Link
+            to={routerParameter.dataNumber ? "/manage" : "/"}
+            style={{ textDecoration: "none" }}
+          >
             <Button
               text="등록"
               onClicked={() => SubmitData(receiptData, routerParameter)}
               onHovered={function (isHovered: boolean): void {}}
+              className={styles.submitButton}
             />
           </Link>
         </>

@@ -10,14 +10,14 @@ function Button({ text, onClicked, onHovered, className }: TextInputProps) {
     onClicked()
   }
   return (
-    <button
+    <div
       onClick={buttonClicked}
       onMouseEnter={() => onHovered(true)}
       onMouseLeave={() => onHovered(false)}
       className={className}
     >
       {text}
-    </button>
+    </div>
   )
 }
 

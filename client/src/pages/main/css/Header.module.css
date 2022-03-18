@@ -18,8 +18,8 @@
   font-weight: normal;
   text-decoration: none;
   border: 0px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   color: var(--title-color);
   background-color: white;
@@ -30,8 +30,8 @@
   font-weight: normal;
   text-decoration: none;
   border: 0px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   color: var(--primary-color);
   background-color: white;

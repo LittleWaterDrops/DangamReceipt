@@ -36,7 +36,7 @@ function MainScreen() {
               {"원 사용했어요!"}
             </div>
           </div>
-          <Link to="/addData">
+          <Link to="/addData" style={{ textDecoration: "none" }}>
             <Button
               text={"📋 데이터 추가 페이지"}
               className={
@@ -52,7 +52,7 @@ function MainScreen() {
               }}
             />
           </Link>
-          <Link to="/manage">
+          <Link to="/manage" style={{ textDecoration: "none" }}>
             <Button
               text={"📁 데이터 관리 페이지"}
               className={

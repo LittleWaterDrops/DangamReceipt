@@ -44,6 +44,7 @@ function Header() {
 
         return (
           <Link
+            style={{ textDecoration: "none" }}
             to={linkPathName}
             key={linkPathName}
             onClick={() => {
