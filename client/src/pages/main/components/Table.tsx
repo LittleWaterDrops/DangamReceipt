@@ -1,6 +1,12 @@
 import { CardUseDataModel } from "../models/CardUseDataModel"
 import { useTable } from "react-table"
 import { useMemo, useState } from "react"
+import "../css/Table.css"
+import MaUTable from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
 
 type TableProps = {
   items: CardUseDataModel[]
@@ -63,31 +69,32 @@ function Table({ items, getSelectedNumber }: TableProps) {
   }
 
   return (
-    <table {...getTableProps()}>
-      <thead>
+    <MaUTable {...getTableProps()} className="table">
+      <TableHead>
         {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            <th>
-              <h4>선택</h4>
-            </th>
+          <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <TableCell>선택</TableCell>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <TableCell {...column.getHeaderProps()}>{column.render("Header")}</TableCell>
             ))}
-          </tr>
+          </TableRow>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
+      </TableHead>
+      <TableBody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row)
 
           return (
-            <tr
+            <TableRow
               onClick={() => {
                 rowClicked(row.index, row.values.No)
               }}
               {...row.getRowProps()}
+              className={
+                row.index === selectedIndex ? "selectedRow" : row.index % 2 == 0 ? "oddRow" : ""
+              }
             >
-              <td>
+              <TableCell>
                 <input
                   type={"radio"}
                   value={"radio"}
@@ -96,15 +103,15 @@ function Table({ items, getSelectedNumber }: TableProps) {
                   }}
                   checked={row.index === selectedIndex}
                 />
-              </td>
+              </TableCell>
               {row.cells.map((cell) => (
-                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                <TableCell {...cell.getCellProps()}>{cell.render("Cell")}</TableCell>
               ))}
-            </tr>
+            </TableRow>
           )
         })}
-      </tbody>
-    </table>
+      </TableBody>
+    </MaUTable>
   )
 }
 
