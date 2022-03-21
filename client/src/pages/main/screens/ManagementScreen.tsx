@@ -5,6 +5,9 @@ import Button from "../components/Button"
 import Table from "../components/Table"
 import { CardUseDataModel } from "../models/CardUseDataModel"
 import fileDownload from "js-file-download"
+import Popup from "../components/Popup"
+import "reactjs-popup/dist/index.css"
+import styles from "../css/ManagementScreen.module.css"
 
 const initialData: CardUseDataModel = {} as CardUseDataModel
 
@@ -45,32 +48,46 @@ function ManagementScreen() {
             items={cardUseData}
             getSelectedNumber={(parameter: number) => setSelectedNumber(parameter)}
           />
-          <Link to={`/addData/${selectedNumber}`}>
-            <Button
-              text={"수정"}
-              onClicked={() => {}}
-              onHovered={function (isHovered: boolean): void {}}
-            />
-          </Link>
-          <Link to={`/manage`}>
-            <Button
-              text={"삭제"}
-              onClicked={() => {
+          <div>
+            <Link to={`/addData/${selectedNumber}`} style={{ textDecoration: "none" }}>
+              <Button
+                text={"수정"}
+                className={styles.button}
+                onClicked={() => {}}
+                onHovered={function (isHovered: boolean): void {}}
+              />
+            </Link>
+            <Popup
+              trigger={
+                <Link to={`/manage`} style={{ textDecoration: "none" }}>
+                  <Button
+                    text={"삭제"}
+                    className={styles.button}
+                    onClicked={() => {}}
+                    onHovered={function (isHovered: boolean): void {}}
+                  />
+                </Link>
+              }
+              title={"삭제 경고"}
+              content={"정말 삭제하시겠습니까?"}
+              twoButton={true}
+              buttonFunction={function (): void {
                 dataDelete()
+                window.location.reload()
+              }}
+            ></Popup>
+            <Button
+              text={"엑셀 파일 다운로드"}
+              className={styles.button}
+              onClicked={() => {
+                downloadXSLX().then((result) => {
+                  console.log(result)
+                  fileDownload(result.data, "test_python.py")
+                })
               }}
               onHovered={function (isHovered: boolean): void {}}
             />
-          </Link>
-          <Button
-            text={"엑셀 파일 다운로드"}
-            onClicked={() => {
-              downloadXSLX().then((result) => {
-                console.log(result)
-                fileDownload(result.data, "test_python.py")
-              })
-            }}
-            onHovered={function (isHovered: boolean): void {}}
-          />
+          </div>
         </>
       )}
     </div>

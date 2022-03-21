@@ -39,6 +39,7 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
     <div>
       <h3>{title}</h3>
       <input
+        type={inputType === "password" ? "password" : ""}
         ref={inputRef}
         value={text}
         onChange={onChange}

@@ -19,6 +19,7 @@ import { CardUseDataModel } from "../models/CardUseDataModel"
 import Calendar from "../components/Calendar"
 import { isEmpty } from "./ManagementScreen"
 import styles from "../css/AddDataScreen.module.css"
+import Popup from "../components/Popup"
 
 const initialData: ReceiptModel = { isProved: true } as ReceiptModel
 
@@ -27,6 +28,7 @@ function AddDataScreen() {
   const [member, setMember] = useState([""])
   const [usage, setUsage] = useState([""])
   const [isInit, setIsInit] = useState(false)
+  const [validation, setValidation] = useState(false)
   const routerParameter = useParams()
 
   useEffect(() => {
@@ -75,7 +77,10 @@ function AddDataScreen() {
     })
   }, [])
 
-  console.log(receiptData)
+  useEffect(() => {
+    // 전송 가능한 데이터인지 확인
+    DataValidationCheck(receiptData)
+  }, [receiptData])
 
   return (
     <div>
@@ -128,41 +133,71 @@ function AddDataScreen() {
           <ToggleButton
             onClicked={(parameter) => setReceiptData({ ...receiptData, isProved: parameter })}
           />
-          <Link to={routerParameter.dataNumber ? "/manage" : ""} style={{ textDecoration: "none" }}>
+          {validation ? (
+            <Popup
+              trigger={
+                <Link
+                  to={routerParameter.dataNumber ? "/manage" : ""}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button
+                    text="등록"
+                    onClicked={() => {}}
+                    onHovered={function (isHovered: boolean): void {}}
+                    className={styles.submitButton}
+                  />
+                </Link>
+              }
+              title={"등록 경고"}
+              content={"정말 등록하시겠습니까?"}
+              twoButton={true}
+              buttonFunction={function (): void {
+                SubmitData(receiptData, routerParameter)
+                window.location.reload()
+              }}
+            ></Popup>
+          ) : (
             <Button
               text="등록"
-              onClicked={() => SubmitData(receiptData, routerParameter)}
+              onClicked={() => {
+                alert("데이터가 유효하지 않습니다.\n미기입한 데이터가 있는지 확인이 필요합니다.")
+              }}
               onHovered={function (isHovered: boolean): void {}}
               className={styles.submitButton}
             />
-          </Link>
+          )}
         </>
       )}
     </div>
   )
-}
 
-function SubmitData(dataToSubmit: ReceiptModel, routerParameter: Readonly<Params<string>>) {
-  try {
-    Convert.receiptModelToJson([dataToSubmit])
+  function SubmitData(dataToSubmit: ReceiptModel, routerParameter: Readonly<Params<string>>) {
+    try {
+      Convert.receiptModelToJson([dataToSubmit])
 
-    // 새로 추가하는 데이터인 경우
-    if (isEmpty(routerParameter)) {
-      insertCardUseData(dataToSubmit)
-    }
-    // 수정하는 데이터인 경우
-    else {
-      const resultData: updateCardDataProps = {
-        submitData: dataToSubmit,
-        dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
+      // 새로 추가하는 데이터인 경우
+      if (isEmpty(routerParameter)) {
+        insertCardUseData(dataToSubmit)
       }
+      // 수정하는 데이터인 경우
+      else {
+        const resultData: updateCardDataProps = {
+          submitData: dataToSubmit,
+          dataNumber: parseInt(JSON.parse(JSON.stringify(routerParameter.dataNumber))),
+        }
 
-      updateCardUseDataWithNumber(resultData)
+        updateCardUseDataWithNumber(resultData)
+      }
+    } catch (e: any) {}
+  }
+
+  function DataValidationCheck(dataToSubmit: ReceiptModel) {
+    try {
+      Convert.receiptModelToJson([dataToSubmit])
+      setValidation(true)
+    } catch (e: any) {
+      setValidation(false)
     }
-
-    alert("success")
-  } catch (e: any) {
-    alert("failed - " + e)
   }
 }
 
