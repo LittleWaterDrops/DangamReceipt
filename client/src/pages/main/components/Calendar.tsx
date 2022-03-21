@@ -26,12 +26,13 @@ function Calendar({ initialText, returnValue }: CalendarProps) {
 
   return (
     <>
-      <h3>{selectedDate ? "선택된 날짜: " + selectedDate : "날짜를 선택해주세요."}</h3>
+      <h3>{"날짜를 선택해주세요."}</h3>
       <ReactCalendar
         className="react-calendar"
         value={selectedDate ? new Date(selectedDate) : null}
         onChange={(parameter: Date) => onChange(parameter)}
       />
+      <h3>{"선택된 날짜: " + selectedDate}</h3>
     </>
   )
 }

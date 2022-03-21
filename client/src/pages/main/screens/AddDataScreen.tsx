@@ -82,6 +82,8 @@ function AddDataScreen() {
     DataValidationCheck(receiptData)
   }, [receiptData])
 
+  console.log(validation)
+
   return (
     <div>
       {isInit && (
@@ -136,10 +138,7 @@ function AddDataScreen() {
           {validation ? (
             <Popup
               trigger={
-                <Link
-                  to={routerParameter.dataNumber ? "/manage" : ""}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to={routerParameter.dataNumber ? "" : ""} style={{ textDecoration: "none" }}>
                   <Button
                     text="등록"
                     onClicked={() => {}}
@@ -153,7 +152,7 @@ function AddDataScreen() {
               twoButton={true}
               buttonFunction={function (): void {
                 SubmitData(receiptData, routerParameter)
-                window.location.reload()
+                window.location.replace("/manage")
               }}
             ></Popup>
           ) : (

@@ -23,3 +23,8 @@ app.listen(port, () => {
 // 라우터 설정
 app.use("/home/", HomeRouter)
 app.use("/management/", ManagementRouter)
+
+// will serve index.html for every page refresh.
+app.get("*", (request, respond) => {
+  respond.sendFile(path.join(__dirname, "../../buildFile/build/index.html"))
+})
