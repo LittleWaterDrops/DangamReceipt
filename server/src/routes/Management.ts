@@ -66,8 +66,8 @@ router.get("/getSumPaidAmount/", (request: Request, response: Response) => {
 })
 
 router.get("/downloadXSLX/", (request: Request, response: Response) => {
-  const pythonDirection: string = `test_python.py`
-  const fileToDownload: string = `test_python.py`
+  const pythonDirection: string = `sql_pyxl_dgcard_use.py`
+  const fileToDownload: string = `3월_기술본부_법인카드사용내역서.xlsx`
   const python = spawn("python3", [pythonDirection])
   python.on("close", (code) => {
     response.download(fileToDownload)
