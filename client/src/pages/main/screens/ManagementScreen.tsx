@@ -10,6 +10,7 @@ import "reactjs-popup/dist/index.css"
 import styles from "../css/ManagementScreen.module.css"
 
 const initialData: CardUseDataModel = {} as CardUseDataModel
+const LAST_MONTH = new Date().getMonth()
 
 // 오브젝트가 비어있음을 확인
 export const isEmpty = (object: any) => {
@@ -82,7 +83,7 @@ function ManagementScreen() {
               onClicked={() => {
                 downloadXSLX().then((result) => {
                   console.log(result)
-                  fileDownload(result.data, "3월_기술본부_법인카드사용내역서.xlsx")
+                  fileDownload(result.data, `${LAST_MONTH}월_기술본부_법인카드사용내역서.xlsx`)
                 })
               }}
               onHovered={function (isHovered: boolean): void {}}
