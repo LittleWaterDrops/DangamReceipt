@@ -1,4 +1,4 @@
-const CURRENT_MONTH = new Date().getMonth()
+const CURRENT_MONTH = new Date().getMonth() + 1
 
 const DBTables = {
   MEMBER_LIST: "DGmembers",
