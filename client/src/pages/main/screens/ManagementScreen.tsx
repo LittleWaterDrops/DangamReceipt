@@ -83,7 +83,7 @@ function ManagementScreen() {
               onClicked={() => {
                 downloadXSLX().then((result) => {
                   console.log(result)
-                  fileDownload(result.data, `3월_기술본부_법인카드사용내역서.xlsx`)
+                  fileDownload(result.data, `${LAST_MONTH}월_기술본부_법인카드사용내역서.xlsx`)
                 })
               }}
               onHovered={function (isHovered: boolean): void {}}
