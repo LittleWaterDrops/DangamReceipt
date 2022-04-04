@@ -23,12 +23,14 @@ function ManagementScreen() {
   const [isInit, setIsInit] = useState(false)
   // selectedNumber 초기화
   useEffect(() => {
-    setSelectedNumber(cardUseData[0].No)
+    setSelectedNumber(cardUseData[0]?.No)
   }, [cardUseData])
 
   // 카드 사용 내역 데이터 호출
   useEffect(() => {
     getCardUseData().then((cardUseData) => {
+      console.log(cardUseData)
+
       setCardUseData(cardUseData)
       setIsInit(true)
     })

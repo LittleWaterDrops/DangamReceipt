@@ -62,7 +62,8 @@ router.post("/updateCardUseDataWithNumber/", (request: Request, response: Respon
 router.get("/getSumPaidAmount/", (request: Request, response: Response) => {
   DBConnection.query(`SELECT SUM(금액) FROM ${DBTables.USE_DATA}`, (result?: any) => {
     const paidAmount = Object.values(result[0])
-    response.send(paidAmount)
+
+    response.send(paidAmount[0] ? paidAmount : [0])
   })
 })
 

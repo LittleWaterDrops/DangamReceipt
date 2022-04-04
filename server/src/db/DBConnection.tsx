@@ -46,7 +46,6 @@ const DBControl = {
         if (error) {
           console.log("error when query", error)
         }
-        console.log(results[0])
         callback(results)
         DBControl.end(createConnection)
       })
@@ -55,7 +54,6 @@ const DBControl = {
         if (error) {
           console.log("error when query", error)
         }
-        console.log(results[0])
         callback(results)
         DBControl.end(createConnection)
       })
