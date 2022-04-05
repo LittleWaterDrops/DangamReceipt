@@ -26,7 +26,7 @@ function MainScreen() {
         <div className={styles.mainContainer}>
           <div className={isInit ? styles.welcomeText : styles.nonInitContainer}>환영합니다!</div>
           <div className={isInit ? styles.informationText : styles.nonInitContainer}>
-            {"이번 달은"}
+            {"이번 달은 현재까지"}
           </div>
           <div className={isInit ? styles.textField : styles.nonInitContainer}>
             <div className={isInit ? styles.paidAmountText : styles.nonInitContainer}>
