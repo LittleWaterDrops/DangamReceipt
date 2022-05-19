@@ -7,13 +7,14 @@ type DropDownProps = {
   initialText: string
   memberList: string[]
   returnValue: (member: string[]) => void
+  nonTextField?: boolean
 }
 
 type MenuItemProps = {
   itemName: string
 }
 
-function DropDown({ title, initialText, memberList, returnValue }: DropDownProps) {
+function DropDown({ title, initialText, memberList, returnValue, nonTextField }: DropDownProps) {
   const [isActive, setIsActive] = useState(false)
   const [currentName, setCurrentName] = useState(initialText)
 
@@ -52,16 +53,24 @@ function DropDown({ title, initialText, memberList, returnValue }: DropDownProps
   return (
     <div className="menu-container">
       <div className="text-icon-field">
-        <TextInput
-          title={title}
-          initialText={currentName}
-          returnValue={(parameter) => returnValue([parameter])}
-        />
+        {!nonTextField && (
+          <TextInput
+            title={title}
+            initialText={currentName}
+            returnValue={(parameter) => returnValue([parameter])}
+          />
+        )}
         <button onClick={dropDownToggle}>
           {isActive ? <AiFillCaretDown /> : <AiFillCaretRight />}
         </button>
       </div>
-      <div className={`menu${isActive ? "-active" : ""}`}>
+      <div
+        className={
+          !nonTextField
+            ? `menu${isActive ? "-active" : ""}`
+            : `menuNonTextField${isActive ? "-active" : ""}`
+        }
+      >
         {memberList.map((item) => (
           <MenuItem itemName={item} key={item} />
         ))}

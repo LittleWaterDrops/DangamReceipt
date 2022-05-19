@@ -35,13 +35,23 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
     }
   }
 
+  const inputValue = (text: string) => {
+    let result = text
+
+    if (inputType === "number") {
+      // 금액에 콤마 표기
+      result = text.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+    }
+    return result
+  }
+
   return (
     <div>
       <h3>{title}</h3>
       <input
         type={inputType === "password" ? "password" : ""}
         ref={inputRef}
-        value={text}
+        value={inputValue(text)}
         onChange={onChange}
         onBlur={handleBlur}
         onKeyDown={checkEnterPressed}

@@ -59,12 +59,23 @@ router.post("/updateCardUseDataWithNumber/", (request: Request, response: Respon
   )
 })
 
-router.get("/getSumPaidAmount/", (request: Request, response: Response) => {
-  DBConnection.query(`SELECT SUM(금액) FROM ${DBTables.USE_DATA}`, (result?: any) => {
-    const paidAmount = Object.values(result[0])
+router.get("/getSumPaidAmount/:currentUsage", (request: Request, response: Response) => {
+  if (request.params.currentUsage === "전체") {
+    DBConnection.query(`SELECT SUM(금액) FROM ${DBTables.USE_DATA}`, (result?: any) => {
+      const paidAmount = Object.values(result[0])
 
-    response.send(paidAmount[0] ? paidAmount : [0])
-  })
+      response.send(paidAmount[0] ? paidAmount : [0])
+    })
+  } else {
+    DBConnection.query(
+      `SELECT SUM(금액) FROM ${DBTables.USE_DATA} WHERE 구분 = '${request.params.currentUsage}'`,
+      (result?: any) => {
+        const paidAmount = Object.values(result[0])
+
+        response.send(paidAmount[0] ? paidAmount : [0])
+      }
+    )
+  }
 })
 
 router.get("/downloadXSLX/", (request: Request, response: Response) => {
