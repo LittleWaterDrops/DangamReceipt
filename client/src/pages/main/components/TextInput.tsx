@@ -40,7 +40,7 @@ function TextInput({ title, initialText, inputType, returnValue }: TextInputProp
 
     if (inputType === "number") {
       // 금액에 콤마 표기
-      result = text.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+      result = text.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
     return result
   }
