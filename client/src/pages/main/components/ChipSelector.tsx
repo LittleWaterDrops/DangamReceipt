@@ -56,7 +56,10 @@ function ChipSelector({ title, initialSelectedMember, memberList, setMember }: C
 
   return (
     <div className="menu-container">
-      <h3>{title}</h3>
+      <div className="title-container">
+        <h3>{title}</h3>
+        <h3>{"총 인원 : " + selectedChips.length + " 명"}</h3>
+      </div>
       <div className={selectedChips.length === 0 ? "sub-text" : "sub-text-selected"}>
         {selectedChips.length === 0
           ? "참석자를 모두 선택해주세요."

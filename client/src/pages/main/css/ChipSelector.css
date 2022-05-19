@@ -4,6 +4,12 @@
   flex-direction: column;
 }
 
+.title-container {
+  display: flex;
+  width: 35em;
+  justify-content: space-between;
+}
+
 .chip-container {
   width: 35em;
   margin-top: 5px;
