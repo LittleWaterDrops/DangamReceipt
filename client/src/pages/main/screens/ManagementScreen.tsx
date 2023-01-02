@@ -10,7 +10,7 @@ import "reactjs-popup/dist/index.css"
 import styles from "../css/ManagementScreen.module.css"
 
 const initialData: CardUseDataModel = {} as CardUseDataModel
-const LAST_MONTH = new Date().getMonth()
+const LAST_MONTH = new Date().getMonth() !== 0 ? new Date().getMonth() : 12
 
 // 오브젝트가 비어있음을 확인
 export const isEmpty = (object: any) => {
